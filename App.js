@@ -1,19 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import IndexScreen from "./src/screens/IndexScreen";
+import { BlogProvider } from "./src/context/BlogContext";
+/**
+ * "BlogProvider" is imported using curly brackets as at "BlogContext.js", does not export default but "const" variable.
+ */
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const navigator = createStackNavigator(
+  {
+    Index: IndexScreen,
   },
-});
+  {
+    initialRouteName: "Index",
+    defaultNavigationOptions: {
+      title: "Blogs",
+    },
+  }
+);
+
+//export default createAppContainer(navigator); [INFO] In order to wrap the navigator, assigned to a variable "App"
+const App = createAppContainer(navigator);
+
+export default () => {
+  return (
+    // Rather than returning the "App", it is enclosed inside the "BlogProvider"
+    <BlogProvider>
+      <App />
+    </BlogProvider>
+  );
+};
