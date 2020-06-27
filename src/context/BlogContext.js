@@ -1,5 +1,4 @@
 import createDataContext from "./createDataContext";
-import { call } from "react-native-reanimated";
 
 //const BlogContext = React.createContext(); // Context is imported from "createDataContext.js"
 
